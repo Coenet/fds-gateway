@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fandom-sucks-gateway
+  labels:
+    app: fandom-sucks-gateway
+spec:
+  selector:
+    matchLabels:
+      app: fandom-sucks-gateway
+  template:
+    metadata:
+      labels:
+        app: fandom-sucks-gateway
+    spec:
+      containers:
+      - name: fandom-sucks-gateway
+        image: coenet/apigateway:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 443
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 200Mi
+            cpu: 80m
+        volumeMounts:
+        - name: secrets
+          mountPath: /app/secrets
+          readOnly: true
+      volumes:
+      - name: secrets
+        secret:
+          secretName: api-gateway-ta-secret
+      imagePullSecrets:
+      - name: regcred
