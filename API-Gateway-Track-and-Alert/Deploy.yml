@@ -28,9 +28,3 @@ spec:
         - name: secrets
           mountPath: /app/secrets
           readOnly: true
-      volumes:
-      - name: secrets
-        secret:
-          secretName: api-gateway-ta-secret
-      imagePullSecrets:
-      - name: regcred

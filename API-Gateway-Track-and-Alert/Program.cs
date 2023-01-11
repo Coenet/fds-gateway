@@ -4,10 +4,10 @@ using Ocelot.Middleware;
 using Ocelot.Provider.Kubernetes;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddJsonFile("secrets/appsettings.secrets.json", true);
+//builder.Configuration.AddJsonFile("secrets/appsettings.secrets.json", true);
 
 
-var securityKey = builder.Configuration.GetSection("Keys")["SecurityKey"];
+//var securityKey = builder.Configuration.GetSection("Keys")["SecurityKey"];
 
 // Add services to the container.
 
@@ -40,9 +40,9 @@ app.MapControllers();
 // Add Authorization
 var config = new OcelotPipelineConfiguration
 {
-    AuthorizationMiddleware
-        = async (downStreamContext, next) =>
-        await JwtMiddleware.CreateAuthorizationFilter(downStreamContext, securityKey, next)
+    //AuthorizationMiddleware
+    //    = async (downStreamContext, next) =>
+    //    await JwtMiddleware.CreateAuthorizationFilter(downStreamContext, securityKey, next)
 };
 
 app.UseOcelot(config).Wait();
