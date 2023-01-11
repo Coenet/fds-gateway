@@ -24,7 +24,3 @@ spec:
           limits:
             memory: 200Mi
             cpu: 80m
-        volumeMounts:
-        - name: secrets
-          mountPath: /app/secrets
-          readOnly: true
